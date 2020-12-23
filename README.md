@@ -1,10 +1,13 @@
 # CRM
 This project aims at throughly understand the implementation detail of paper "A New Low-Light Image Enhancement Algorithm using Camera Response Model",ICCV2017. The original project,[OpenCE](https://github.com/baidut/OpenCE),is implemented by Matlab. Since the project is reproduced by python, some key function cannot be reproduced accuratly. If you find this project helpfully and have some advices,please feel free to contact me.
 
-# How to use the code
+## How to use the code
 Just run the command "python main.py -i 'dataPath'". The variable "dataPath" specifies the testing data path.
 
-# Testing Result
+## Difference
+For estimating the exposure ratio map, the original project uses the Matlab function, pcg and inchol, to solve the linear equation systen. But in our code, we use [**spsolve**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve.html#scipy.sparse.linalg.spsolve) to solve the linear problems. And the results reveal the inferior of the function, not only in performance but also in efficiency.
+
+## Testing Result
 input image|official illumMap|our illumMap|official result|our result
 ----|-----|------|-------|--------
 ![13](https://github.com/DavidQiuChao/CRM/blob/main/figs/13.jpg)|![or13](https://github.com/DavidQiuChao/CRM/blob/main/figs/pp_13.jpg)|![mr13](https://github.com/DavidQiuChao/CRM/blob/main/figs/my_13.jpg)|![oilu13](https://github.com/DavidQiuChao/CRM/blob/main/figs/illuM13.jpg)|![milu13](https://github.com/DavidQiuChao/CRM/blob/main/figs/illum_13.jpg)
