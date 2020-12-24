@@ -8,7 +8,7 @@ Just run the command "python main.py -i 'dataPath'". The variable "dataPath" spe
 For estimating the exposure ratio map, the original project uses the Matlab function, [**Precondition Conjugate Gradient**](https://www.mathworks.com/help/matlab/ref/pcg.html) and [**Incomplete Cholesky Decomposition**](https://ww2.mathworks.cn/help/matlab/ref/ichol.html?requestedDomain=cn.mathworks.com), to solve the linear equation systen. But in our code, we use [**Conjugate-Gradient**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg) to solve the linear problems. And the results reveal the inferior of the function, not only in performance but also in efficiency.
 
 ## Testing Result
-input image|official illumMap|our illumMap|official result|our result
+input image|official result|our result|official illumMap|our illumMap
 ----|-----|------|-------|--------
 ![13](https://github.com/DavidQiuChao/CRM/blob/main/figs/13.jpg)|![or13](https://github.com/DavidQiuChao/CRM/blob/main/figs/pp_13.jpg)|![mr13](https://github.com/DavidQiuChao/CRM/blob/main/figs/my_13.jpg)|![oilu13](https://github.com/DavidQiuChao/CRM/blob/main/figs/illuM13.jpg)|![milu13](https://github.com/DavidQiuChao/CRM/blob/main/figs/illum_13.jpg)
 ![36](https://github.com/DavidQiuChao/CRM/blob/main/figs/36.jpg)|![or36](https://github.com/DavidQiuChao/CRM/blob/main/figs/pp_36.jpg)|![mr36](https://github.com/DavidQiuChao/CRM/blob/main/figs/my_36.jpg)|![oilu36](https://github.com/DavidQiuChao/CRM/blob/main/figs/illuM36.jpg)|![milu36](https://github.com/DavidQiuChao/CRM/blob/main/figs/illum_36.jpg)
