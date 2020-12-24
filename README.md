@@ -1,5 +1,5 @@
 # CRM
-This project aims at throughly understand the implementation detail of paper "A New Low-Light Image Enhancement Algorithm using Camera Response Model",ICCV2017. The original project,[OpenCE](https://github.com/baidut/OpenCE),is implemented by Matlab. Since the project is reproduced by python, some key function cannot be reproduced accuratly. If you find this project helpfully and have some advices,please feel free to contact me.
+This project aims at throughly understand the implementation detail of paper "A New Low-Light Image Enhancement Algorithm using Camera Response Model",ICCV2017. The original project,[**OpenCE**](https://github.com/baidut/OpenCE),is implemented by Matlab. Since the project is reproduced by python, some key function cannot be reproduced accuratly. If you find this project helpfully and have some advices,please feel free to contact me.
 
 ## How to use the code
 Just run the command "python main.py -i 'dataPath'". The variable "dataPath" specifies the testing data path.
