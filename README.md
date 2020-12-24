@@ -5,7 +5,7 @@ This project aims at throughly understand the implementation detail of paper "A 
 Just run the command "python main.py -i 'dataPath'". The variable "dataPath" specifies the testing data path.
 
 ## Difference
-For estimating the exposure ratio map, the original project uses the Matlab function, [pcg](https://www.mathworks.com/help/matlab/ref/pcg.html) and **inchol**, to solve the linear equation systen. But in our code, we use [**spsolve**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve.html#scipy.sparse.linalg.spsolve) to solve the linear problems. And the results reveal the inferior of the function, not only in performance but also in efficiency.
+For estimating the exposure ratio map, the original project uses the Matlab function, [**pcg**](https://www.mathworks.com/help/matlab/ref/pcg.html) and ['inchol'](https://ww2.mathworks.cn/help/matlab/ref/ichol.html?requestedDomain=cn.mathworks.com), to solve the linear equation systen. But in our code, we use [**spsolve**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.spsolve.html#scipy.sparse.linalg.spsolve) to solve the linear problems. And the results reveal the inferior of the function, not only in performance but also in efficiency.
 
 ## Testing Result
 input image|official illumMap|our illumMap|official result|our result
