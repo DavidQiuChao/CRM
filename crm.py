@@ -49,29 +49,6 @@ def cameraModel(im,k):
     return g
 
 
-def exposureMap(im,win,alpha,rMax,eps):
-    # init exposure map
-    t0 = np.max(im,axis=2)
-    H,W = t0.shape
-    # exposure map refinement
-    t0 = cv2.resize(t0,(int(W/2),int(H/2)))
-    dt0h = diffH(t0)
-    dt0w = diffW(t0)
-    kh = np.zeros((win,win))
-    kw = np.zeros((win,win))
-    kh[:,2] = 1
-    kw[2,:] = 1
-    gsh = cv2.filter2D(dt0h,-1,kh)
-    gsw = cv2.filter2D(dt0w,-1,kw)
-    Wh = 1./(abs(gsh)*abs(dt0h)+eps)
-    Ww = 1./(abs(gsw)*abs(dt0w)+eps)
-    T = solveLinearEquation(t0,Wh,Ww,alpha/2.)
-    T = cv2.resize(T,(W,H))
-    T = np.expand_dims(T,2).repeat(3,2)
-    kR = np.minimum(1./T,rMax)
-    return kR
-
-
 def solveLinearEquation(t0,Wh,Ww,alpha):
     H,W = t0.shape
     k = H*W
@@ -110,10 +87,33 @@ def solveLinearEquation(t0,Wh,Ww,alpha):
     D = 1-(dh+dw+dha+dwa)
     A = (Ah+Aw)+(Ah+Aw).T+sp.spdiags(D,[0],k,k)
     t0 = np.expand_dims(t0.flatten(),1).astype(np.float32)
-    tout = spsolve(A,t0)
-    out = np.reshape(tout,(H,W))
-    out = normValue(out)
+    tout = cg(A,t0,tol=0.001)
+    out = np.reshape(tout[0],(H,W))
+    out = np.minimum(1,np.maximum(0,out))
     return out
+
+
+def exposureMap(im,win,alpha,rMax,eps):
+    # init exposure map
+    t0 = np.max(im,axis=2)
+    H,W = t0.shape
+    # exposure map refinement
+    t0 = cv2.resize(t0,(int(W/2),int(H/2)))
+    dt0h = diffH(t0)
+    dt0w = diffW(t0)
+    kh = np.zeros((win,win))
+    kw = np.zeros((win,win))
+    kh[:,2] = 1
+    kw[2,:] = 1
+    gsh = cv2.filter2D(dt0h,-1,kh)
+    gsw = cv2.filter2D(dt0w,-1,kw)
+    Wh = 1./(abs(gsh)*abs(dt0h)+eps)
+    Ww = 1./(abs(gsw)*abs(dt0w)+eps)
+    T = solveLinearEquation(t0,Wh,Ww,alpha/2.)
+    T = cv2.resize(T,(W,H))
+    T = np.expand_dims(T,2).repeat(3,2)
+    kR = np.minimum(1./(T+eps),rMax)
+    return kR
 
 
 def CRM(src):
