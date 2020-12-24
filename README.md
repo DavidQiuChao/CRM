@@ -5,7 +5,7 @@ This project aims at throughly understand the implementation detail of paper "A 
 Just run the command "python main.py -i 'dataPath'". The variable "dataPath" specifies the testing data path.
 
 ## Difference
-For estimating the exposure ratio map, the original project uses the Matlab function, [**Precondition Conjugate Gradient**](https://www.mathworks.com/help/matlab/ref/pcg.html) and [**Incomplete Cholesky Decomposition**](https://ww2.mathworks.cn/help/matlab/ref/ichol.html?requestedDomain=cn.mathworks.com), to solve the linear equation systen. But in our code, we use [**Conjugate-Gradient**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg) to solve the linear problems. And the "CG" function in Scipy takes more time than "PCG" function in Matlab.
+For estimating the exposure ratio map, the original project uses the Matlab function, [**Precondition Conjugate Gradient**](https://www.mathworks.com/help/matlab/ref/pcg.html) and [**Incomplete Cholesky Decomposition**](https://ww2.mathworks.cn/help/matlab/ref/ichol.html?requestedDomain=cn.mathworks.com), to solve the linear equation system. But in this code, the [**Conjugate-Gradient**](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg) is uesd to solve the linear problems. And the "CG" function in Scipy takes more time than "PCG" function in Matlab.
 
 ## Testing Result
 input image|official result|our result|official illumMap|our illumMap
